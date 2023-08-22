@@ -1,0 +1,37 @@
+import wollok.game.*
+import auto.*
+
+
+program juego {
+	
+	// configurar el tablero
+	game.height(12)
+	game.width(12)
+	game.title("Hermoso juego")
+	game.ground("paredLadrillos3.jpg")
+	
+	//agregar el corsa al tabler
+	corsa.position(game.at(
+					0.randomUpTo(game.width()).truncate(0),
+					0.randomUpTo(game.height()).truncate(0)
+					)
+	)/// puede ser, origin(), center() o .at() para pasarle coordenada
+	game.addVisual(corsa)
+	
+	keyboard.up().onPressDo({
+		corsa.arriba()
+	})
+	keyboard.down().onPressDo({
+		corsa.abajo()
+	})
+	keyboard.right().onPressDo({
+		corsa.derecha()
+	})
+	keyboard.left().onPressDo({
+		corsa.izquierda()
+	})
+	
+	
+	
+	game.start()
+}
