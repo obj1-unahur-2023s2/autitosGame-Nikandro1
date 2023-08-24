@@ -1,7 +1,6 @@
 import wollok.game.*
 
 
-
 object corsa {
 	// definimos los atributos para imagen y posición de nuestro elemento
 	var position 
@@ -12,14 +11,19 @@ object corsa {
 	method position() = position
 	method position(nuevaPosicion) { position = nuevaPosicion }
 	method arriba() {
-		position = position.up(1) // sube la posicion un lugar
+		if(position.y() < game.height()-1 ){
+			position = position.up(1) // sube la posicion un lugar	
+		}
+		else
+			position = game.at(position.x(), 0)
+		
 	}
 	method abajo(){
-		if (position.x() == 0) {
+		if (position.y() > 0) {
 			position = position.down(1)
 		}
 		else {
-			position = game.at(position.x(), game.height())	
+			position = game.at(position.x(), game.height()-1)	
 		}
 		
 	}
@@ -33,6 +37,10 @@ object corsa {
 		
 	}
 	method izquierda(){
-		position = position.left(1)
+		if (position.x() > 0){
+			position = position.left(1)
+		}
+		else
+			position = game.at(game.width(), position.y())
 	}
 }
